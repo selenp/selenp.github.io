@@ -3224,10 +3224,14 @@
         </script>
 	</head>
 	<body>
-	    <h1>It has been passed</h1>
-		<div class="clock" style="margin:2em;"></div>
+        <h1>It has been passed</h1>
+        <div class="clock" style="position: center"></div>
         <h1>since cindy became mine.</h1>
-		
+        <font color="#8b4513">void</font>&nbsp;<font color="#228b22">service</font>(<font color="#00008b">ServletRequest</font>&nbsp;<font color="#6495ed">req</font>, <font color="#00008b">ServletResponse</font>&nbsp;<font color="#6495ed">res</font>) {</br></br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<font color="#00008b">Cookie</font> cookie = new <font color="#00008b">Cookie</font>(<font color="#228b22">"I_love"</font>, <font color="#228b22">"you"</font>);</br></br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<font color="#daa520">cookie</font>.setMaxAge(10000 * 365 * 24 * 60 * 60);</br></br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<font color="#6495ed">res</font>.addCookie(<font color="#daa520">cookie</font>);</br></br>
+        }
 		<script type="text/javascript">
 			var clock;
 
