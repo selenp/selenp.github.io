@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Git,Github," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Jeff's eHandbook" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本文旨在使用通俗易懂的文字，讲解版本控制背后的理论，以便你能对程序员们如何工作有个全局概念。本文不涉及代码，不用下载啥东西，循序渐进，不关注繁复细节，只有文字和一些不怎么漂亮的手绘涂鸦。">
+<meta name="keywords" content="Git,Github">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大白话解释 Git 和 GitHub">
+<meta property="og:url" content="http://yoursite.com/2018/06/23/study2/index.html">
+<meta property="og:site_name" content="Jeff&#39;s eHandbook">
+<meta property="og:description" content="本文旨在使用通俗易懂的文字，讲解版本控制背后的理论，以便你能对程序员们如何工作有个全局概念。本文不涉及代码，不用下载啥东西，循序渐进，不关注繁复细节，只有文字和一些不怎么漂亮的手绘涂鸦。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/pics/study2/logo.gif">
+<meta property="og:image" content="http://yoursite.com/pics/study2/1.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/2.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/3.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/4.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/5.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/6.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/7.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/8.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/9.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/10.jpg">
+<meta property="og:image" content="http://yoursite.com/pics/study2/11.jpg">
+<meta property="og:updated_time" content="2018-06-25T02:24:53.286Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大白话解释 Git 和 GitHub">
+<meta name="twitter:description" content="本文旨在使用通俗易懂的文字，讲解版本控制背后的理论，以便你能对程序员们如何工作有个全局概念。本文不涉及代码，不用下载啥东西，循序渐进，不关注繁复细节，只有文字和一些不怎么漂亮的手绘涂鸦。">
+<meta name="twitter:image" content="http://yoursite.com/pics/study2/logo.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/23/study2/"/>
+
+
+
+
+
+  <title>大白话解释 Git 和 GitHub | Jeff's eHandbook</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-121411556-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jeff's eHandbook</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-top">
+          <a href="/top/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-signal"></i> <br />
+            
+            TopX
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/23/study2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff_Gao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/pics/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeff's eHandbook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大白话解释 Git 和 GitHub</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-23T10:00:00+08:00">
+                2018-06-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具文/" itemprop="url" rel="index">
+                    <span itemprop="name">工具文</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/23/study2/" class="leancloud_visitors" data-flag-title="大白话解释 Git 和 GitHub">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,712
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  本文旨在使用通俗易懂的文字，讲解版本控制背后的理论，以便你能对程序员们如何工作有个全局概念。本文不涉及代码，不用下载啥东西，循序渐进，不关注繁复细节，只有文字和一些不怎么漂亮的手绘涂鸦。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p><img src="/pics/study2/logo.gif" alt="logo"></p>
+<p></p><h2>写本文的动机</h2><br>学习任何东西都能在网络上找到如此之多的指导教程，这一直令我惊讶不已。Git 和 Github 也不例外，网络上有大量优秀资源，这些资源要么只对其中一个，要么兼顾二者引导你开始学习。以下是我特别喜欢的一些资源：<p></p>
+<ul><br><li><a href="http://blog.teamtreehouse.com/git-for-designers-part-1" target="_blank" rel="noopener">Treehouse – 写给设计师的 Git 入门介绍</a></li><br><li><a href="http://rogerdudler.github.io/git-guide/" target="_blank" rel="noopener">Roger Dudler – Git 简易教程</a></li><br><li><a href="https://www.pluralsight.com/blog/software-development/github-tutorial" target="_blank" rel="noopener">Pluralsight – Github：初学者指南</a></li></ul><br>然而，我发现这些教程总是跳过许多理论知识，直接解释如何通过命令行或 Github 桌面应用程序使用 Git 。坦白说，如果你只是想知道你的开发团队谈论的到底是什么，这些指导教程也绰绰有余了。如上所述，我的目标是对版本控制的整体概念进行简明扼要地讲解，同时希望能让你了解到版本控制是如此酷。<br><h2>让我们从最基础的开始：版本控制</h2><br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/1.jpg" style="width:100%;height:auto;"></div><br>版本控制（Version control）:学习它，爱上它，享受它。顾名思义，<b>版本控制系统是任何能让你了解到一个文件的历史，以及它的发展过程的系统。</b>之前作为平面设计师时，我常常会遇到这种文件：<br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/2.jpg" style="width:100%;height:auto;"></div><br>看起来眼熟？尽管上述系统不是一个好用的系统 ，但它确实是一个版本控制系统。更复杂点的例子就像，Google 文档的 “修订历史”或  Photoshop 的“历史”工具。<br><h2>开始 Git</h2><br><b>Git 是一种专为处理文本文件而设计的版本控制系统。</b>因为，归根到底，这就是代码的本质：一堆堆以某种方式联合在一起的文本文件。Git 是一个可安装应用，它允许你对你自己所做的更改进行注释，用以创建易于导航的系统历史。<br><br>（附： “Git”  也是工程师取的名字，我们对市场部同仁感到抱歉）<br><br><b>那么， Git 做了什么，是简单地保存文件所做不到的呢？</b>从根本上讲，文件保存就是一个简化的版本控制系统，但坦率地说，它并不是一个好用的系统，因为它只能前进。当然，你也许会争论“撤消”按钮可以让你的文件回滚到以前的状态。但我们都清楚，“撤消”按钮有其局限性，最明显示的是，在关闭文件时，文件的过去也随之丢失。<br><br>另外，文件保存是非常个人化的。它不能够显示整个系统的历史，只能够显示该文件的。针对这一点，你可能会想，“嗯，我不是一个工程师，我不需要为系统烦恼”。我愿意花些时间来解释一下，很多事情你认为不是“系统”，而实际上它们就是。<br><br><b>以  Sally 为例，她是一个正在写下一个大冒险奇幻小说系列的作家。</b>Sally 已经写完该系列小说中的第一本，并把它传给了她的编辑。此外，由于她才华出众，在等待编辑的反馈的同时，她还写了第二本书的前三章。每本书都建立了独立的 Word 文件。<br><br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/3.jpg" style="width:100%;height:auto;"></div><br>在某个快乐的日子，Sally  等来了她的编辑关于第一本书的反馈。他担心年轻的读者不想读一系列专写兽人故事的书，希望她在这个故事中引入一些精灵。关于这点，Sally  叹了口气，但很快意识到，她的精灵新角色将带来始料未及的冲突和曲折的情节。然后，她做了以下事情：<br><ul><br><li>在第一本书中加入新角色，并修改故事情节。</li><br><li>完成第一本书之后，对第二本书的故事情节，进行必要的修改。</li><br><li>所有的这些修改，导致她需要引入某个地理位置到第一本书中，而不是第二本书。</li><br><li>重新编辑第一本书，让它包含新的地理位置。</li></ul><br>终于，她推开了她的键盘，确信已经把精灵融入到了她的奇幻世界之中。<br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/4.jpg" style="width:100%;height:auto;"></div><br>你瞧，Sally 实际上在处理一个系统。她的两本书互相影响。角色、地理位置和故事情节在两本书中流动交织。然而，遗憾的是，一个月后，她的文件系统里什么都没有了。Word 的 “文档历史”工具，或她曾经粘贴在显示屏边缘用于记录修改过程的便签纸，将把所有的变化过程都揉合在一起。<br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/5.jpg" style="width:100%;height:auto;"></div><br>这正是Git 大放光芒之处。如果 Sally 一直结合 Git 使用Word，她就能对所有这些相关的变化做一个关于“将精灵引入到系列”的简洁小结。她可以看到所有穿插在页、章节、文件，以及每本书中的修改记录，让她真正地了解引入精灵对她的奇幻系列产生的影响。这个“简洁的小结”就是我们在 Git 领域中所讲的<b>提交（commit) </b><br><br><b>回顾一下。</b> Git 是一个软件，它允许你通过提交对一个系统（或一组）文件的历史进行注释。这些提交便是在给定时间点对系统做出的差异“快照”。<br><br>那么，如果我是Sally，我的<b>提交历史</b>看起来是这样子的：<br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/6.jpg" style="width:100%;height:auto;"></div><br><h2> Github </h2><br>到目前为止，一切都还不错。但是，<b>如果 Sally 同时用到两台电脑工作，将会发生什么呢？</b>问得好。这时，就该用到 Github了。注意，不要和 Git 混淆了。Github 获取 Git 中的提交历史，并将其存储在互联网上，因此你可以从任一一台电脑访问它。你在本机（例如：你当前正在使用的电脑）<b>推送（pushing）</b>提交到 Github，然后，从另一台新的或不同的电脑上<b>拉取（pulling）</b>这些提交。<br><br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/7.jpg" style="width:100%;height:auto;"></div><br>让我们假设上图为 Sally 的工作流程。她在家里的台式电脑（左边，橘黄色的）上开启她一天的工作。接下来，她完成了几个章节的写作，又做了一些编辑工作，等等。整个过程中，她对工作总共进行了三次策略性的“快照”（Git 提交）。<br><br>下午，Sally 常常喜欢带着她的笔记本电脑（上图中的右侧，蓝色的）去咖啡馆写作。今天也不例外。因此，在关闭家里的台式电脑之前，她需要确认当前的Git 提交历史已<b>推送（push）</b>到了在线Github。一旦被上传到 Github，这些提交记录就被存储在<b>远程仓库（remote repository）</b>中。<br><br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/8.jpg" style="width:100%;height:auto;"></div><br>如上图所示，树的类比完全适用于奇幻作家协会在这个项目上的合作情况，仓库历史沿主分支向上移动。常规工作流始于每个作者为完成一个工作任务（例如编写章节内容，或排版章节）而在主分支上创建分支。只有当更改得到其他合作作家的批准时，分支才会被合并到主分支上（请谨记，主分支上的内容，才是最终要发布的内容）。<br><br>当一个分支的内容<b>合并（merged）</b>到主分支时，意味着该分支的内容会覆盖主分支上的。因此，现有内容的任何更改都将会替代之前的。当然，任何新添加的内容也会添加到主分支。实际上，当分支合并到主分支时，该分支的提交历史被添加到主分支提交历史的顶部。<br><br>然而，你可能正在思考：<b>人们在本机的工作和之后才推送到 Github 的工作变更是如何连接到一起的呢？</b><br>关于这个问题，重点在于：你在 Github 的远程仓库是你本机工作项目的一个镜像。这意味着，你在自己的电脑里存储了该项目（例如：一个已设置可进行 Git 提交的文件夹）的本地 Git 仓库。在这个本地的 Git 仓库（再次，这是一个特定术语，指你的电脑里某个启用了 Git 功能的文件夹）中，你拥有与该项目相关的所有文件，在本文的例子中，即《奇幻系列生物辞典》。<br><br>它的工作原理很像 Dropbox ：你在不同的设备（你的家庭电脑、办公室电脑，等等）上创建本地文件夹，进行工作并更新这些文件。最后，这些操作被同步到网络上。然而，我们知道，Git/Github 工作流还包含了一些额外的步骤。首先，你必须有意识地对某一时刻的工作执行“快照”（即执行一次提交）。然后，你必须特意地推送这些提交（push） 到 Github。只有这样，你的工作才被同步到网络上的位置（Github 版本库）。<br><br>既然如此，为什么不自动化该工作流呢？为什么不让它像 Dropbox一样，当你更新本地文件时，同时自动更新 Github 上的文件？有很多理由让我们不这么做。最主要的理由是——bugs 。同出版界一样，软件工程中也不是所有写过的东西都要保留。有时，你希望实验一下你的想法，如果实验失败，你希望有一种简单的方式能让工作快速回滚到之前的正确状态上。这也是为什么我们提倡这个经验法则，即在你试图用不同的方法编辑或实验之前，先对当前你希望保留的修改进行提交。频繁地提交小块工作有益无害，事实上，许多工程师为自己能做到这一点而感到自豪。<br><br>现在，回到《奇幻系列生物辞典》。由于  Sally 对兽族有较深的了解，她被挑选为写兽族章节。但她不想在没有经过其它合作人员允许的情况下去修改这本书，于是，她创建了一个本地分支，并在该分支上进行写作和提交。然后，<b>她将本地分支推送到 Github。</b>像往常一样，Github 的远程仓库是本地库的一个镜像，最新进展显示 Sally 已创建了一个包含部分提交的分支（如下图所示）。<br><br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/9.jpg" style="width:100%;height:auto;"></div><br>随着她对本章节的持续写作，Sally 进行了更多的提交，并将它们推送到 Github 的在线镜像分支。终于，她准备请 Tom 和 Adam 一起对她的工作进行评审。因此，她在 Github 上发布了一个<b> Pull Request（发布请求）</b>，这是一个 Github 功能，允许她解释该分支相对于主分支做了哪些修改。Github 还提供了一个简易平台，合作人员可以在该平台上针对分支的修改内容进行讨论，并要求 Sally 在分支合并到主分支之前对一些有异议的内容进行修改。<br><br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/10.jpg" style="width:100%;height:auto;"></div><br>在对部分内容请求修改后，如上图所示，Tom 和 Adam 对 Sally 的分支内容很满意，并决定将她的工作成果合并到 Github 的主分支上。此时，他们所要做的就是将 Sally 之前独立提交的内容，添加到主分支的提交历史顶部：<br><br><div style="width:400px;height:auto;text-align:center;float:none;margin-left:auto;margin-right:auto;"><img src="/pics/study2/11.jpg" style="width:100%;height:auto;"></div><br>此时，Sally可以切换（或“<b>check out</b>”）到本地计算机上的主分支，并将先前在功能分支（兽人章节分支）中的独立提交拉取下来。现在她又要在新的主分支上重新开始了：以该主分支为基础为她的下一步工作创建一个新的本地分支，帮助汤姆编辑有关妖精的章节。因此，这一过程又将重复:<br><ol><br><li>创建本地分支</li><br><li>在本地分支上编辑修改，然后提交</li><br><li>推送提交（Push）到 Github</li><br><li>创建发布请求（Pull Request），说明该分支包含了哪些更改</li><br><li>合并（Merge）分支内容到主分支</li><br><li>将主分支上的最新提交拉取（pull）到本地</li><br><li>重复上述步骤</li><br></ol><br>正如你所看到的，这是一个非常流畅的工作流，完美地结合了独立工作与团队协作。你本机的 Git 提供了一个绝妙的方法，即通过由你自己控制和策划的丰富的历史提交，来创建你工作的各种版本。Github 是一个非常棒的在线版本控制工具，不仅存储和提供了清晰的可视化历史记录，而且还能进行协同工作和质量控制。<br><br>总而言之，我希望我已经说服你去<b>尝试使用 Git  和 Github 进行任何项目</b>。没有理由只有工程师能从这个很棒的工具中受益。毕竟，我们也想看到更多有关兽人的故事。<br><br><h2>本文涉及的术语</h2><br><ul><br><li><b>Version Control（版本控制）: </b>任何一个能够让你了解文件的历史，以及该文件的发展进程的系统。</li><br><li><b>Git：</b>一个版本控制程序，通过对变更进行注释，以创建一个易于遍历的系统历史。</li><br><li><b>Commit（提交）：</b>在指定时间点对系统差异进行的注释 “快照”</li><br><li><b>Local（本地）：</b>指任意时刻工作时正在使用的电脑。</li><br><li><b>Remote（远程）： </b>指某个联网的位置。</li><br><li><b>Repository (仓库，简称 repo)：</b>配置了Git超级权限的特定文件夹，包含了你的项目或系统相关的所有文件。</li><br><li><b>Github：</b>获取本地提交历史记录，并进行远程存储，以便你可以从任何计算机访问这些记录。</li><br><li><b>Pushing（推送）：</b>取得本地Git提交（以及相关的所有工作），然后将其上传到在线Github。</li><br><li><b>Pulling（拉取）：</b>从在线的Github上获取最新的提交记录，然后合并到本地电脑上。</li><br><li><b>Master (branch)：</b>主分支，提交历史 “树”的 “树干”，包含所有已审核的内容/代码。</li><br><li><b>Feature branch（功能分支/特性分支）：</b>一个基于主分支的独立的位置，在再次并入到主分支之前，你可以在这里安全地写工作中的新任务。</li><br><li><b>Pull Request（发布请求）：</b>一个 Github 工具，允许用户轻松地查看某功能分支的更改 （the difference或 “diff”），同时允许用户在该分支合并到主分支之前对其进行讨论和调整。</li><br><li><b>Merging（合并）：</b>该操作指获取功能分支的提交，加入到主分支提交历史的顶部。</li><br><li><b>Checking out（切换）：</b>该操作指从一个分支切换到另一个分支。</li><br></ul>
+
+
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/pics/weichatpay.JPG" alt="Jeff_Gao 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+            <a href="/tags/Github/" rel="tag"># Github</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+          <div style="color: rgba(0, 0, 0, 0.75); font-size:13px; letter-spacing:3px">留个评分再走吧😄</div>
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/04/study1/" rel="next" title="Homebrew环境搭建">
+                <i class="fa fa-chevron-left"></i> Homebrew环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/28/iwontletudown/" rel="prev" title="I won't let you down">
+                I won't let you down <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ5Ny8xNDAyOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/pics/background.jpg"
+                alt="Jeff_Gao" />
+            
+              <p class="site-author-name" itemprop="name">Jeff_Gao</p>
+              <p class="site-description motion-element" itemprop="description">头比蛋疼 心比肾虚</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Jeff_GaoDi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/nwpugaodi" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com/channel/UCD9iKJFltT8xwJL4yvutKQA?view_as=subscriber" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3250870583?refer_flag=1001030201_" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <audio src="http://link.hhtjim.com/163/20952121.mp3" autoplay="autoplay" controls="controls" loop="loop"></audio>
+
+          
+        </div>
+      </section>
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">写本文的动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">让我们从最基础的开始：版本控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">开始 Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text"> Github </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">本文涉及的术语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff_Gao</span>
+
+  
+</div>
+
+
+
+
+  <span id="busuanzi_container_site_uv">
+      本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span class="post-meta-divider">|</span>
+  <span class="post-meta-divider"><a href="https://instagram.com/jeff_gaod">Follow Me on Instagram</a></span>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+ 
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("EPYg3zYwKxJwTPVXkaj4Ow2a-gzGzoHsz", "tdTv4xrvHUrIxdplHU5JWSFJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 12223,
+    el: 'wpac-rating',
+    color: 'f79533'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  <!-- 小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  <!-- 动态背景 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+  <!-- Github丝带 -->
+  <a href="https://github.com/selenp" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+</body>
+</html>
