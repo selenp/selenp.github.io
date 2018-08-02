@@ -3299,7 +3299,11 @@
         <div class="overlay">
         <h1> Cindy 和我在一起已经</h1>
         <div class="clock" style="position:absolute;  left:50%;  top:300px;  margin:0 0 0 -360px "></div>
-        <div style="margin:350 auto; width:422px;">
+        <div style="text-align: center;font-size: 30px;color:#CCC;margin-top: 200px;">
+            <span id="name"></span></br>
+            <span id="date"></span>
+        </div>
+        <div style="margin:350 auto; width:422px;margin-top: 50px;">
             <font color="#8b4513">void</font>&nbsp;<font color="#228b22">service</font><font color="white"> ( </font></font><font color="#00008b">ServletRequest</font>&nbsp;<font color="#6495ed">req</font>, <font color="#00008b">ServletResponse</font>&nbsp;<font color="#6495ed">res</font><font color="white"> ) {</font></br></br>
         &nbsp;&nbsp;&nbsp;&nbsp;<font color="#00008b">Cookie</font> <font color="white">cookie = new</font> <font color="#00008b">Cookie</font><font color="white">(</font><font color="#228b22"> "I_love"</font><font color="white"> , </font> <font color="#228b22">"you" </font><font color="white">);</font></br></br>
         &nbsp;&nbsp;&nbsp;&nbsp;<font color="#daa520">cookie</font><font color="white">.setMaxAge(10000 * 365 * 24 * 60 * 60);</font></br></br>
@@ -3326,7 +3330,33 @@
                                                             clockFace: 'DailyCounter'
                                                             });
                               });
-            </script>
-        
+        </script>
+        <script>
+            var date=new Date;
+            var month=date.getMonth()+1;
+            var day=date.getDate();
+            if(month<10){var now=month*100+day;}
+            else if(month>=10){now=month+day;}
+            var arrdates=[101,115,214,219,528,704,817,906,920,1001,1008,1017,1111,1120,1122,1225];
+            var arrnames=["元旦","马丁路德金纪念日","情人节","总统节","美国大兵日","独立日","七夕节","高頔的生日","周年纪念日","国庆","哥伦布日","重阳节","退伍军人日","李仙惠的生日","感恩节","圣诞节"];
+            for( var i=0;i<=arrdates.length;i++){
+                if(arrdates[i]>=now){
+                    if(arrdates[i]==now){
+                        document.getElementById("name").innerHTML=arrnames[i]+"快乐！";
+                        break;
+                    }
+                    else if(arrdates[i]>now){
+                        document.getElementById("name").innerHTML="下一次非凡日是："+arrnames[i];
+                        var minmonth=Math.floor(arrdates[i]/100);
+                        var minday=(arrdates[i]%100);
+                        document.getElementById("date").innerHTML=minmonth+"月"+minday+"日";
+                        break;
+                    }
+                }
+                if(arrdates[arrdates.length-1]<now){
+                    document.getElementById("name").innerHTML="今年的非凡日都过完了，期待明年吧~";
+                }
+            }
+        </script>
     </body>
 </html>
