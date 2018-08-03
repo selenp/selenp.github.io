@@ -3349,8 +3349,8 @@
                         document.getElementById("name").innerHTML="下一次非凡日是："+arrnames[i];
                         var minmonth=Math.floor(arrdates[i]/100);
                         var minday=(arrdates[i]%100);
-                        var Date1=new Date(minmonth+'-'+minday+'-'+2018);
-                        var Date2=new Date(month+'-'+day+'-'+2018);
+                        var Date1=new Date(minmonth+'/'+minday+'/'+2018);
+                        var Date2=new Date(month+'/'+day+'/'+2018);
                         var gap=parseInt(Math.abs(Date1-Date2)/1000/60/60/24);
                         document.getElementById("date").innerHTML=minmonth+"月"+minday+"日,&nbsp;"+"距现在还有"+gap+"天";
                         break;
